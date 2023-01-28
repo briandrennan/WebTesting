@@ -1,0 +1,7 @@
+<Project>
+  <PropertyGroup>
+    <LangVersion>11</LangVersion>   
+    <Deterministic>true</Deterministic>
+    <AnalysisMode>AllEnabledByDefault</AnalysisMode>
+  </PropertyGroup>
+</Project>
