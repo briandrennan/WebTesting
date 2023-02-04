@@ -9,8 +9,9 @@ using Xunit.Abstractions;
 namespace WebTesting.ProductTests;
 
 [Collection(DefaultDatabaseCollection.Name)]
-public class TodoControllerTests :
-    IClassFixture<IntegrationTestFactory>
+public sealed class TodoControllerTests :
+    IClassFixture<IntegrationTestFactory>,
+    IDisposable
 {
     private readonly IntegrationTestFactory _factory;
     private readonly ITestOutputHelper _output;
@@ -37,5 +38,11 @@ public class TodoControllerTests :
     {
         var values = await _client.GetFromJsonAsync<IList<TodoItem>>("api/todos").ConfigureAwait(false);
         _output.WriteLine("Successfully read {0} items from the server.", values.Count);
+    }
+
+    public void Dispose()
+    {
+        _factory.Dispose();
+        _client.Dispose();
     }
 }

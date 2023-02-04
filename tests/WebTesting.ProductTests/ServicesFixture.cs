@@ -23,9 +23,8 @@ public sealed class ServicesFixture : IDisposable, ILoggable
             .Add(memorySource)
             .Build();
 
-        string? connectionString = Configuration.GetConnectionString("Database");
-        if (connectionString is null)
-            throw new InvalidOperationException("The 'Database' connection string is missing.");
+        var connectionString = Configuration.GetConnectionString("Database");
+        ArgumentException.ThrowIfNullOrEmpty(connectionString);
 
         ServiceProvider = new ServiceCollection()
             .AddSingleton(Configuration)

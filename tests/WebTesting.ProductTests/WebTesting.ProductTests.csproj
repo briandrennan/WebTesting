@@ -28,6 +28,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\src\WebTesting.Client\WebTesting.Client.csproj" />
     <ProjectReference Include="..\..\src\WebTesting.Core\WebTesting.Core.csproj" />
     <ProjectReference Include="..\..\src\WebTestingApi\WebTestingApi.csproj" />
   </ItemGroup>
