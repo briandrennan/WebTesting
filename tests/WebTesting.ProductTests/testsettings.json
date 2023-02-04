@@ -1,0 +1,6 @@
+﻿{
+  "ConnectionStrings": {
+    "Database": "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=TodoDB;Integrated Security=SSPI;Application Name=Todo Tests"
+  },
+  "EnableLogging": true
+}

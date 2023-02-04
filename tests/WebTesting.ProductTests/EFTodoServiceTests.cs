@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 
 using WebTesting.Core;
 using WebTesting.Core.EFCore;
@@ -10,33 +11,33 @@ namespace WebTesting.ProductTests;
 
 [Collection(DefaultDatabaseCollection.Name)]
 public sealed class EFTodoServiceTests :
-    IClassFixture<TodoContextFixture>,
+    IClassFixture<ServicesFixture>,
     IClassFixture<RespawnFixture>,
     IClassFixture<CancellationTokenFixture>
 {
+    private readonly IServiceScope _scope;
     private readonly TodoContext _dbContext;
+    private readonly EFTodoService _sut;
     private readonly RespawnFixture _respawner;
     private readonly CancellationTokenFixture _cancellation;
-    private readonly EFTodoService _sut;
-    private readonly ITestOutputHelper _output;
 
     public EFTodoServiceTests(
-        TodoContextFixture todoContext,
+        ServicesFixture services,
         RespawnFixture respawner,
         CancellationTokenFixture cancellation,
         ITestOutputHelper output)
     {
-        ArgumentNullException.ThrowIfNull(todoContext);
+        ArgumentNullException.ThrowIfNull(services);
         ArgumentNullException.ThrowIfNull(respawner);
         ArgumentNullException.ThrowIfNull(cancellation);
         ArgumentNullException.ThrowIfNull(output);
 
-        _dbContext = todoContext.Context;
+        _scope = services.ServiceProvider.CreateScope();
+        _dbContext = _scope.ServiceProvider.GetRequiredService<TodoContext>();
         _sut = new(_dbContext);
         _respawner = respawner;
         _cancellation = cancellation;
-        _output = output;
-        todoContext.Log = output.WriteLine;
+        services.Log = output.WriteLine;
     }
 
     [Fact]

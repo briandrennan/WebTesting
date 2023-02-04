@@ -21,7 +21,8 @@ public static class ServiceCollectionExtensions
             });
         });
 
-        services.AddScoped<ITodoService, EFTodoService>();
+        services
+            .AddScoped<ITodoService, EFTodoService>();
 
         return services;
     }
