@@ -32,6 +32,7 @@ public class TodoContext : DbContext
 
             todo.Property(entity => entity.Title)
                 .IsRequired()
+                .HasMaxLength(100)
                 .IsUnicode(false);
 
             todo.Property(entity => entity.Created)
@@ -56,6 +57,7 @@ public class TodoContext : DbContext
 
             detail.Property(entity => entity.Detail)
                 .IsRequired(true)
+                .HasMaxLength(2000)
                 .IsUnicode(false);
 
             detail.Property(entity => entity.Revision)
