@@ -22,6 +22,7 @@ public sealed class EFTodoService : ITodoService
         }
 
         var entry = await _context.Todos
+            .TagWith("EFTodoService.CreateOrUpdateAsync(todo)")
             .TagWithCallSite()
             .Include(t => t.Details)
             .AsTracking()
@@ -89,6 +90,7 @@ public sealed class EFTodoService : ITodoService
     public Task DeleteAsync(Guid id, CancellationToken cancellationToken)
     {
         return _context.Todos
+            .TagWith("EFTodoService.DeleteAsync(id)")
             .TagWithCallSite()
             .Where(e => e.Id == id)
             .ExecuteDeleteAsync(cancellationToken);
@@ -97,6 +99,7 @@ public sealed class EFTodoService : ITodoService
     public async Task<IReadOnlyList<TodoItem>> GetItemsAsync(CancellationToken cancellationToken)
     {
         return await _context.Todos
+            .TagWith("EFTodoService.GetItemsAsync()")
             .TagWithCallSite()
             .Select(e => new TodoItem
             {
