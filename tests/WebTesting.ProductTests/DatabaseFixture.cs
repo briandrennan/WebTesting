@@ -7,14 +7,17 @@ using Xunit.Sdk;
 
 namespace WebTesting.ProductTests;
 
-[Collection(DefaultDatabaseCollection.Name)]
+[CollectionDefinition(DefaultDatabaseCollection.Name)]
 public class DefaultDatabaseCollection : ICollectionFixture<DatabaseFixture>
 {
     public const string Name = $"Default {nameof(DatabaseFixture)}";
 }
 
-public class DatabaseFixture : IAsyncLifetime
+public sealed class DatabaseFixture : IAsyncLifetime, IDisposable
 {
+    private readonly TodoContext _context;
+    private bool _initialized;
+
     public DatabaseFixture(IMessageSink sink)
     {
         ArgumentNullException.ThrowIfNull(sink);
@@ -36,19 +39,27 @@ public class DatabaseFixture : IAsyncLifetime
                 .EnableRetryOnFailure();
         });
 
-        Context = new TodoContext(options.Options);
+        _context = new TodoContext(options.Options);
     }
 
-    public TodoContext Context { get; }
+    public void Dispose()
+    {
+        _context.Dispose();
+        GC.SuppressFinalize(this);
+    }
 
     public async Task DisposeAsync()
     {
-        await Context.DisposeAsync().ConfigureAwait(false);
+        await _context.DisposeAsync().ConfigureAwait(false);
     }
 
     public async Task InitializeAsync()
     {
-        await Context.Database.EnsureDeletedAsync().ConfigureAwait(false);
-        await Context.Database.EnsureCreatedAsync().ConfigureAwait(false);
+        if (!_initialized)
+        {
+            await _context.Database.EnsureDeletedAsync().ConfigureAwait(false);
+            await _context.Database.EnsureCreatedAsync().ConfigureAwait(false);
+            _initialized = true;
+        }
     }
 }

@@ -4,19 +4,20 @@ namespace WebTesting.ProductTests;
 
 public sealed class CancellationTokenFixture : IDisposable
 {
-    private readonly CancellationTokenSource _cancellationTokenSource;
-
     public CancellationTokenFixture()
     {
-        _cancellationTokenSource = new CancellationTokenSource();
+        Source = new CancellationTokenSource();
         TimeSpan delay = Debugger.IsAttached ? TimeSpan.FromMinutes(10) : TimeSpan.FromSeconds(10);
-        _cancellationTokenSource.CancelAfter(delay);
+        Source.CancelAfter(delay);
     }
 
-    public CancellationToken Token => _cancellationTokenSource.Token;
+    public CancellationTokenSource Source { get; }
+
+    public CancellationToken Token => Source.Token;
 
     public void Dispose()
     {
-        _cancellationTokenSource.Dispose();
+        Source.Dispose();
+        GC.SuppressFinalize(this);
     }
 }
