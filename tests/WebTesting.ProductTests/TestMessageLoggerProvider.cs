@@ -4,9 +4,9 @@ namespace WebTesting.ProductTests;
 
 internal sealed class TestMessageLoggerProvider : ILoggerProvider
 {
-    private readonly ServicesFixture _fixture;
+    private readonly ILoggable _fixture;
 
-    public TestMessageLoggerProvider(ServicesFixture fixture)
+    public TestMessageLoggerProvider(ILoggable fixture)
     {
         _fixture = fixture;
     }

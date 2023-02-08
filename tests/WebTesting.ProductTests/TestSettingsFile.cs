@@ -8,4 +8,8 @@ internal static class TestSettingsFile
         .Build();
 
     internal static readonly string ConnectionString = Configuration.GetConnectionString("Database")!;
+
+    internal static readonly bool EnableLogging =
+        bool.TryParse(Configuration.GetSection("EnableLogging").Value, out var enableLogging)
+        && enableLogging;
 }

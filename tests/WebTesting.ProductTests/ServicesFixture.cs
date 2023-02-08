@@ -7,7 +7,7 @@ using WebTesting.Core.Extensions;
 
 namespace WebTesting.ProductTests;
 
-public sealed class ServicesFixture : IDisposable
+public sealed class ServicesFixture : IDisposable, ILoggable
 {
     public ServicesFixture()
     {

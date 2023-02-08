@@ -1,15 +1,14 @@
 ﻿using Microsoft.Extensions.Logging;
 
 namespace WebTesting.ProductTests;
+
 internal sealed class TestMessageLogger : ILogger
 {
-    private readonly ServicesFixture _fixture;
-    private readonly string _categoryName;
+    private readonly ILoggable _fixture;
 
-    public TestMessageLogger(ServicesFixture fixture, string categoryName)
+    public TestMessageLogger(ILoggable fixture, string categoryName)
     {
         _fixture = fixture;
-        _categoryName = categoryName;
     }
 
     public IDisposable? BeginScope<TState>(TState state) where TState : notnull
@@ -18,13 +17,13 @@ internal sealed class TestMessageLogger : ILogger
     }
 
     public bool IsEnabled(LogLevel logLevel)
-    {
-        return bool.TryParse(_fixture.Configuration.GetSection("EnableLogging").Value, out var isEnabled)
-            && isEnabled;
-    }
+        => TestSettingsFile.EnableLogging;
 
-    public void Log<TState>(LogLevel logLevel, EventId eventId, TState state, Exception? exception, Func<TState, Exception?, string> formatter)
-    {
-        _fixture.Log?.Invoke(formatter(state, exception));
-    }
+    public void Log<TState>(
+        LogLevel logLevel,
+        EventId eventId,
+        TState state,
+        Exception? exception,
+        Func<TState, Exception?, string> formatter)
+        => _fixture.Log?.Invoke(formatter(state, exception));
 }
