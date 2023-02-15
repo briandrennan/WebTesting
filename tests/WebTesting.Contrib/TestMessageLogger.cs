@@ -1,8 +1,8 @@
 ﻿using Microsoft.Extensions.Logging;
 
-namespace WebTesting.ProductTests;
+namespace WebTesting.Contrib;
 
-internal sealed class TestMessageLogger : ILogger
+public sealed class TestMessageLogger : ILogger
 {
     private readonly ILoggable _fixture;
 

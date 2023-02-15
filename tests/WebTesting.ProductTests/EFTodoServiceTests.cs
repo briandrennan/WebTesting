@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
+using WebTesting.Contrib;
 using WebTesting.Core;
 using WebTesting.Core.EFCore;
 using WebTesting.Shared;

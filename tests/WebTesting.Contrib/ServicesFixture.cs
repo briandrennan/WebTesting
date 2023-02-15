@@ -5,7 +5,7 @@ using Microsoft.Extensions.Logging;
 
 using WebTesting.Core.Extensions;
 
-namespace WebTesting.ProductTests;
+namespace WebTesting.Contrib;
 
 public sealed class ServicesFixture : IDisposable, ILoggable
 {

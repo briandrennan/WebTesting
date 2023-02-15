@@ -1,4 +1,4 @@
-﻿namespace WebTesting.ProductTests;
+﻿namespace WebTesting.Contrib;
 
 public interface ILoggable
 {

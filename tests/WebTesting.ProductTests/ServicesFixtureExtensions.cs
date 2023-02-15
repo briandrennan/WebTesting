@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 
+using WebTesting.Contrib;
 using WebTesting.Core.EFCore;
 
 namespace WebTesting.ProductTests;

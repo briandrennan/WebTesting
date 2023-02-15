@@ -2,6 +2,7 @@
 
 using Microsoft.AspNetCore.Mvc.Testing;
 
+using WebTesting.Contrib;
 using WebTesting.Shared;
 
 using Xunit.Abstractions;

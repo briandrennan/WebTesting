@@ -2,12 +2,9 @@
 
 using WebTesting.Core.EFCore;
 
-using Xunit.Abstractions;
-using Xunit.Sdk;
+namespace WebTesting.Contrib;
 
-namespace WebTesting.ProductTests;
-
-[CollectionDefinition(DefaultDatabaseCollection.Name)]
+[CollectionDefinition(Name)]
 public class DefaultDatabaseCollection : ICollectionFixture<DatabaseFixture>
 {
     public const string Name = $"Default {nameof(DatabaseFixture)}";
@@ -26,12 +23,7 @@ public sealed class DatabaseFixture : IAsyncLifetime, IDisposable
         var options = new DbContextOptionsBuilder<TodoContext>();
         options
             .EnableDetailedErrors()
-            .EnableSensitiveDataLogging()
-            .LogTo(msg =>
-            {
-                var message = new DiagnosticMessage(msg);
-                _ = sink.OnMessage(message);
-            }, minimumLevel: Microsoft.Extensions.Logging.LogLevel.Information);
+            .EnableSensitiveDataLogging();
 
         options.UseSqlServer(ConnectionString, sqlServer =>
         {

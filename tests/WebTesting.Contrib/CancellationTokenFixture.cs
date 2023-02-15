@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics;
 
-namespace WebTesting.ProductTests;
+namespace WebTesting.Contrib;
 
 public sealed class CancellationTokenFixture : IDisposable
 {

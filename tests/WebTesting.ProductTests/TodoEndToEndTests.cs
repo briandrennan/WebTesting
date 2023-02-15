@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.Options;
 
 using WebTesting.Client;
+using WebTesting.Contrib;
 using WebTesting.Shared;
 
 using Xunit.Abstractions;

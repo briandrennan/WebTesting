@@ -1,6 +1,6 @@
 ﻿using Respawn;
 
-namespace WebTesting.ProductTests;
+namespace WebTesting.Contrib;
 
 public sealed class RespawnFixture : IAsyncLifetime
 {
