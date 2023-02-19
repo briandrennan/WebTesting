@@ -38,6 +38,7 @@ public sealed class TodoControllerTests :
     public async Task GetTodos_returns_some_todo_data()
     {
         var values = await _client.GetFromJsonAsync<IList<TodoItem>>("api/todos").ConfigureAwait(false);
+        Assert.NotNull(values);
         _output.WriteLine("Successfully read {0} items from the server.", values.Count);
     }
 
