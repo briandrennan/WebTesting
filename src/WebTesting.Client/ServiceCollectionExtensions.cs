@@ -14,6 +14,7 @@ public static class ServiceCollectionExtensions
             .Configure(options)
             .Validate(opt => opt.BaseAddress is not null, "The BaseAddress must be configured.")
             .Validate(opt => opt.BaseAddress.IsAbsoluteUri, "The BaseAddress must be an absolute Uri.")
+            .ValidateOnStart()
             ;
 
         services.AddHttpClient<TodoHttpClient>(httpClient =>
