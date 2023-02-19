@@ -4,11 +4,11 @@
 
 @area-todo
 Scenario: Create Todo from nothing
-	Given a todo with title 'Creation test'
+    Given a todo with title 'Creation test'
     And the item 'implement hooks'
     And the item 'implement step binding'
-	When the todo does not exist
-	Then the todo is created with revision #1
+    When the todo does not exist
+    Then the todo is created with revision #1
 
 @area-todo
 Scenario: Deleting a todo removes the todo
