@@ -8,11 +8,9 @@ using Microsoft.Extensions.Logging;
 using WebTesting.Contrib;
 using WebTesting.Core.EFCore;
 
-using WebTestingApi;
-
 namespace WebTesting.ProductTests;
 
-public class IntegrationTestFactory : WebApplicationFactory<ApiMarker>, ILoggable
+public class IntegrationTestFactory : WebApplicationFactory<Program>, ILoggable
 {
     protected override void ConfigureWebHost(IWebHostBuilder builder)
     {
