@@ -25,5 +25,8 @@ public sealed class TestMessageLogger : ILogger
         TState state,
         Exception? exception,
         Func<TState, Exception?, string> formatter)
-        => _fixture.Log?.Invoke(formatter(state, exception));
+    {
+        ArgumentNullException.ThrowIfNull((formatter));
+        _fixture.Log?.Invoke(formatter(state, exception));
+    }
 }
