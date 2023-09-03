@@ -8,7 +8,7 @@ using Xunit.Abstractions;
 
 namespace WebTesting.ProductTests;
 
-[Collection(DefaultDatabaseCollection.Name)]
+[Collection(DefaultDatabaseCollectionDefinition.Name)]
 public sealed class TodoEndToEndTests :
     IClassFixture<IntegrationTestFactory>,
     IClassFixture<CancellationTokenFixture>,

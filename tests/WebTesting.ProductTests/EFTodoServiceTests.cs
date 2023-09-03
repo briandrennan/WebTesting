@@ -10,7 +10,7 @@ using Xunit.Abstractions;
 
 namespace WebTesting.ProductTests;
 
-[Collection(DefaultDatabaseCollection.Name)]
+[Collection(DefaultDatabaseCollectionDefinition.Name)]
 public sealed class EFTodoServiceTests :
     IClassFixture<ServicesFixture>,
     IClassFixture<RespawnFixture>,

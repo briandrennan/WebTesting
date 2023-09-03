@@ -4,12 +4,6 @@ using WebTesting.Core.EFCore;
 
 namespace WebTesting.Contrib;
 
-[CollectionDefinition(Name)]
-public class DefaultDatabaseCollection : ICollectionFixture<DatabaseFixture>
-{
-    public const string Name = $"Default {nameof(DatabaseFixture)}";
-}
-
 public sealed class DatabaseFixture : IAsyncLifetime, IDisposable
 {
     private readonly TodoContext _context;

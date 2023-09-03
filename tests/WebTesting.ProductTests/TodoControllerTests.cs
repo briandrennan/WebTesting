@@ -9,7 +9,7 @@ using Xunit.Abstractions;
 
 namespace WebTesting.ProductTests;
 
-[Collection(DefaultDatabaseCollection.Name)]
+[Collection(DefaultDatabaseCollectionDefinition.Name)]
 public sealed class TodoControllerTests :
     IClassFixture<IntegrationTestFactory>,
     IDisposable
